@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Appium Training Framework">
+    <groups>
+        <run>
+            <include name="Smoke"/>  <!-- it will run the test with Smoke tag -->
+        </run>
+    </groups>
+    <listeners>
+        <listener class-name="TestUtils.Listeners"/>  <!-- the directory of the listeners class in the project-->
+    </listeners>
+    <test verbose="2" preserve-order="true" name="End to End Framework Test">
+        <classes>
+            <class name="eCommerce_appium_tests.eCommerce_tc_1"/>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="Login Error Validation Test">
+        <classes>
+            <class name="eCommerce_appium_tests.eCommerce_tc_2"/>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="Mobile Browser Test">
+        <classes>
+            <class name="mobile_browser_app.mobileBrowser_tc_1"/>
+        </classes>
+    </test>
+</suite>
