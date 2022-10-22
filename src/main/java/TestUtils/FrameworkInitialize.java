@@ -30,6 +30,8 @@ public class FrameworkInitialize extends AppiumUtils {
         // the ip address from system prop is not null ? if true execute this : if false execute this
 //      service = startAppiumServer("127.0.0.1",4723);
         UiAutomator2Options options = new UiAutomator2Options();
+        options.setCapability("appium:automationName","uiautomator2");
+        options.setCapability("platformName","android");
         options.setDeviceName(properties.getProperty("AndroidDeviceName")); // name of the device or the emulator
         options.setApp(System.getProperty("user.dir")+properties.getProperty("GeneralStoreApkPath")); // path of the apk
         options.setChromedriverExecutable(System.getProperty("user.dir")+properties.getProperty("ChromeDriverPath")); // is a Must for configuring the mobile browser
