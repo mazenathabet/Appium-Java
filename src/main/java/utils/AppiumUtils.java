@@ -14,13 +14,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class AppiumUtils {
 
+    static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     AppiumDriverLocalService service;
+
     // Actions that are common in both IOS and Android
     protected Double getFormattedAmount(String amount) {
         return Double.parseDouble(amount.substring(1));
@@ -37,12 +41,17 @@ public class AppiumUtils {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(jsonContent,new TypeReference<List<HashMap<String, String>>>() {});
     }
-    public AppiumDriverLocalService startAppiumServer(String ipAddress,int port){
-//                start the appium server automatically instead of doing it manually
-        service = new AppiumServiceBuilder()
-                .withAppiumJS(new File("C:\\Users\\mthabet\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js")) // path of the main.js
-                .withIPAddress(ipAddress)  // IP of the appium server
-                .usingPort(port).build();  // the appium port
+
+    public AppiumDriverLocalService startServer(String ipAddress,int port){
+        String node_path = "C:/Program Files/nodejs/node.exe";
+        String Appium_path = "C:\\Users\\mthabet\\node_modules\\appium\\build\\lib\\main.js";
+        service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
+                .usingDriverExecutable(new File(node_path))
+                .withAppiumJS(new File(Appium_path))
+                .withIPAddress(ipAddress)
+                .usingPort(port));
+        System.out.println("Starting the Appium server ... "+"\n"+df.format(new Date())+
+                "\n----------------------------------------------------------------");
         service.start();
         return service;
     }
